@@ -28,4 +28,4 @@ jobs:
     
     # Executing scan
     - name: Running TruffleHog
-      run: trufflehog --regex --entropy=False repo_path `pwd` https://github.com/ayushpriya10/dvna.git
+      run: trufflehog --regex --entropy False --repo_path `pwd` https://github.com/ayushpriya10/dvna.git
