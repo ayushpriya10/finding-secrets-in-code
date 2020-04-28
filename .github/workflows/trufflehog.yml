@@ -1,0 +1,31 @@
+# Renaming the workflow
+name: TruffleHog Scan
+
+# Changing workflow trigger to only push events for master branch
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  # Renaming job name from "build" to "scan"
+  scan:
+    # Switching to Ubuntu 18.04 as runner OS
+    runs-on: ubuntu-18.04
+
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v2
+    
+    # Setting up Python 3.x on the runner
+    - name: Setting up Python 3.x
+      uses: actions/setup-python@v1
+      with:
+        python-version: '3.x'
+     
+    # Installing TruffleHog with PIP
+    - name: Installing TruffleHog
+      run: pip install trufflehog
+    
+    # Executing scan
+    - name: Running TruffleHog
+      run: trufflehog --regex --entropy=False repo_path `pwd` https://github.com/ayushpriya10/dvna.git
