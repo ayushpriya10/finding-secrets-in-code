@@ -13,12 +13,13 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     
-    # Installing Go and Gitleaks
+    # Installing Golang on Runner
     - uses: actions/setup-go@v1
       with:
         go-version: '1.14.2' # The Go version to download
-    - run: GO111MODULE=on go get github.com/zricethezav/gitleaks
 
-    # Executing scan
+    # Installing Gitleaks and executing scan
     - name: Running Gitleaks
-      run: gitleaks --repo-path `pwd` --verbose
+      run: |
+        GO111MODULE=on go get github.com/zricethezav/gitleaks
+        gitleaks --repo-path `pwd` --verbose
