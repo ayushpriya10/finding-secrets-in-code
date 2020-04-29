@@ -21,5 +21,6 @@ jobs:
     # Installing Gitleaks and executing scan
     - name: Running Gitleaks
       run: |
+        export PATH=${PATH}:`go env GOPATH`/bin
         GO111MODULE=on go get github.com/zricethezav/gitleaks
         gitleaks --repo-path `pwd` --verbose
