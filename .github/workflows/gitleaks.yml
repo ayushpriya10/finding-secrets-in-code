@@ -1,0 +1,24 @@
+# Renaming the workflow
+name: Gitleaks Scan
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  scan:
+    # Switching to Ubuntu 18.04 as runner OS
+    runs-on: ubuntu-18.04
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    # Installing Go and Gitleaks
+    - uses: actions/setup-go@v1
+      with:
+        go-version: '1.14.2' # The Go version to download
+    - run: go get github.com/zricethezav/gitleaks
+
+    # Executing scan
+    - name: Running Gitleaks
+      run: gitleaks --repo-path `pwd` --verbose
