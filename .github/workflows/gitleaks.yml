@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-18.04
 
     steps:
-    - uses: actions/checkout@v2
+    # - uses: actions/checkout@v2
     
     # Installing Golang on Runner
     - uses: actions/setup-go@v1
@@ -23,4 +23,5 @@ jobs:
       run: |
         export PATH=${PATH}:`go env GOPATH`/bin
         GO111MODULE=on go get github.com/zricethezav/gitleaks
+        git clone https://github.com/ayushpriya10/finding-secrets-with-ghactions && cd finding-secrets-with-ghactions/
         gitleaks --repo-path `pwd` --verbose
